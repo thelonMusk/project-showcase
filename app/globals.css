@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-surface: #faf9f7;
+  --color-surface-raised: #f2f0ec;
+  --color-ink: #1c1b1a;
+  --color-ink-soft: #63615c;
+  --color-line: #e6e3dd;
+  --color-accent: #92400e;
+  --color-accent-ink: #fff8f0;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.dark {
+  --color-surface: #0b0b0c;
+  --color-surface-raised: #141416;
+  --color-ink: #f2f1ee;
+  --color-ink-soft: #9a978f;
+  --color-line: #232325;
+  --color-accent: #f5a524;
+  --color-accent-ink: #1c1306;
+}
+
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+}
+
+/* If scripting is unavailable, Motion's SSR opacity:0 starting state would
+   otherwise hide the hero image and every project card permanently. */
+@media (scripting: none) {
+  .motion-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
